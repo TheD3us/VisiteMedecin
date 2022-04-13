@@ -3,6 +3,7 @@ package bo;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MedecinGeneraliste {
 	static String chemin = "C:\\Users\\ib\\eclipse-workspace\\VisiteMedecin\\src\\bo\\Medecin.txt";
@@ -16,15 +17,20 @@ public class MedecinGeneraliste {
 		}
 	}
 	
-	
-
-
 	private String nom;
 	private String prenom;
 	private String numeroDeTelephone;
 	private Adresse adresse;
 	private static int tarifConsultation = 30;
+	private ArrayList<Creneau> creneaux = new ArrayList<Creneau> ();
 	
+	
+	public ArrayList<Creneau> getCreneaux() {
+		return creneaux;
+	}
+	public void setCreneaux(ArrayList<Creneau> creneaux) {
+		this.creneaux = creneaux;
+	}
 	public Adresse getAdresse() {
 		return adresse;
 	}
@@ -69,6 +75,12 @@ public class MedecinGeneraliste {
 		System.out.println(this.nom + " " + this.prenom + " " + this.numeroDeTelephone  + " " );
 		this.adresse.afficher();
 		System.out.println(" " + tarifConsultation + " euros");
+		for(Creneau current : creneaux) {
+			if(current != null) {
+			current.afficherCreneau();
+			}
+			
+		}
 	}
 	
 	public void enregistrerMedecin() throws IOException {
@@ -78,13 +90,19 @@ public class MedecinGeneraliste {
 		fw.write("n - " + this.nom + "\n");
 		fw.write("p - " + this.prenom + "\n");
 		fw.write("no - " + this.numeroDeTelephone + "\n");
-		fw.write("a - " + this.adresse + "\n");
+		adresse.enregistrerAdresse();
 		fw.write("---------------------------------");
 		fw.close();
+		
 		}catch (FileNotFoundException e){
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void ajouterCreneau(Creneau creneau) {
+		this.creneaux.add(creneau);
+		creneau.setMedecinGeneraliste(this);
 	}
 	
 }

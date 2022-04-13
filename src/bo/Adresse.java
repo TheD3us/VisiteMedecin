@@ -112,9 +112,7 @@ public class Adresse {
 		+ this.etage + " ");
 	}
 	
-public void enregistrerMedecin() throws IOException {
-		
-
+public void enregistrerAdresse() throws IOException {
 		try {
 			if(this.complement == null) {fw.write(this.complement);}else {fw.write("SO");}
 			if(this.noAppartement == null) {fw.write(this.noAppartement)  ;}else {fw.write("SO");}
