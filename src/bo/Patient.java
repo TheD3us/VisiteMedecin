@@ -11,7 +11,15 @@ public class Patient {
 	private long numeroSecuriteSociale;
 	private LocalDate dateNaissance;
 	private String commentaire;
-
+	private Adresse adresse;
+	
+	
+	public Adresse getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
 	public String getNom() {
 		return nom;
 	}
@@ -56,7 +64,7 @@ public class Patient {
 		this.commentaire = commentaire;
 	}
 	public Patient(String nom, String prenom, String numeroTelephone, char sexe, long numeroSecuriteSociale,
-			LocalDate dateNaissance, String commentaire) throws Exception {
+			LocalDate dateNaissance, String commentaire, Adresse adresse) throws Exception {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.numeroTelephone = numeroTelephone;
@@ -65,6 +73,7 @@ public class Patient {
 		this.numeroSecuriteSociale = numeroSecuriteSociale;
 		this.dateNaissance = dateNaissance;
 		this.commentaire = commentaire;
+		this.adresse = adresse;
 	}
 	
 	private static void verifSexe(char sexe)throws Exception {
@@ -74,7 +83,9 @@ public class Patient {
 	}
 	
 	public void afficher() {
-		System.out.println(this.nom + " " + this.prenom + " " + this.numeroTelephone + " " + this.sexe + " " + this.numeroSecuriteSociale + " " + this.dateNaissance + " " + this.commentaire );
+		System.out.println(this.nom + " " + this.prenom + " " + this.numeroTelephone + " " + this.sexe + " "  );
+		this.adresse.afficher();
+		System.out.println(" "+ this.numeroSecuriteSociale + " " + this.dateNaissance + " " + this.commentaire);
 	}
 	
 

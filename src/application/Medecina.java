@@ -1,19 +1,26 @@
 package application;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import bo.Adresse;
 import bo.MedecinGeneraliste;
 
 public class Medecina {
 	static Scanner sc;
-
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws IOException {
 		int choix = -1;
 		List<MedecinGeneraliste> listeMedecin = new ArrayList<MedecinGeneraliste>();
-		
+		FileInputStream fis = new FileInputStream("C:\\Users\\ib\\eclipse-workspace\\VisiteMedecin\\src\\bo\\Medecin.txt");
 		sc = new Scanner(System.in);
+		
+		while(sc.hasNextLine()) {
+			
+		}
 		while(choix != 0) {
 		System.out.println("--------------------------Medecina--------------------------");
 		System.out.println("Bienvenue dans Medecina, veuillez choisir votre action :");
@@ -40,22 +47,45 @@ public class Medecina {
 		case 3 :{
 				modifierMedecin(listeMedecin);
 		}
+		default :{
+			for(MedecinGeneraliste current : listeMedecin) {
+				current.enregistrerMedecin();
+			}
+		}
 	}
 }
 
 	}
 	
-	public static void ajoutMedecin(List<MedecinGeneraliste> listeMedecin) {
+	public static void ajoutMedecin(List<MedecinGeneraliste> listeMedecin) throws IOException {
 		System.out.println("--------------------------Ajout Médecin--------------------------");
-		
-		System.out.println("Veuiller rentrer le nom du médecin :");
+
+		System.out.println("Veuillez rentrer l'adresse du médecin");
+		System.out.println("numéro de voie");
+		int noVoie = sc.nextInt();
+		System.out.println("complément");
 		sc.nextLine();
+		String complement = sc.nextLine();
+		System.out.println("Type de voie");
+		String typeDeVoie = sc.nextLine();
+		System.out.println("Nom de Rue");
+		String nomDeRue = sc.nextLine();
+		System.out.println("Code Postal");
+		String cpo = sc.nextLine();
+		System.out.println("Ville");
+		String ville = sc.nextLine();
+		System.out.println("N° Appartement");
+		String noAp = sc.nextLine();
+		System.out.println("Etage");
+		String etage = sc.nextLine();
+		Adresse adresse = new Adresse(noVoie,complement,typeDeVoie,nomDeRue, cpo, ville, noAp, etage);
+		System.out.println("Veuiller rentrer le nom du médecin :");
 		String nom = sc.nextLine();
 		System.out.println("Veuiller rentrer le prenom du médecin :");
 		String prenom = sc.nextLine();
 		System.out.println("Veuiller rentrer le numéro de téléphone du médecin :");
 		String numeroDeTelephone = sc.nextLine();
-		MedecinGeneraliste nomVariable = new MedecinGeneraliste(nom, prenom, numeroDeTelephone);
+		MedecinGeneraliste nomVariable = new MedecinGeneraliste(nom, prenom, numeroDeTelephone, adresse);
 		listeMedecin.add(nomVariable);
 
 	}

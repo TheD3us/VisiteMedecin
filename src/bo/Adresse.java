@@ -1,6 +1,21 @@
 package bo;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Adresse {
+	
+	static String chemin = "C:\\Users\\ib\\eclipse-workspace\\VisiteMedecin\\src\\bo\\Medecin.txt";
+	static FileWriter fw;
+	static {
+		try {
+			fw = new FileWriter(chemin);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	private int numeroDeVoie;
 	private String complement;
 	private String typeVoie;
@@ -95,6 +110,28 @@ public class Adresse {
 		+ this.ville + " "
 		+ this.noAppartement + " "
 		+ this.etage + " ");
+	}
+	
+public void enregistrerMedecin() throws IOException {
+		
+
+		try {
+			if(this.complement == null) {fw.write(this.complement);}else {fw.write("SO");}
+			if(this.noAppartement == null) {fw.write(this.noAppartement)  ;}else {fw.write("SO");}
+			if(this.etage == null) {fw.write(this.etage);}else {fw.write("SO");}
+			fw.write(this.numeroDeVoie); 
+			fw.write(this.complement);
+			fw.write(this.typeVoie);
+			fw.write(this.nomDeRue);
+			fw.write(this.codePostal);
+			fw.write(this.ville);
+			fw.write(this.noAppartement);
+			fw.write(this.etage);
+		fw.close();
+		}catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		
 	}
 
 }
