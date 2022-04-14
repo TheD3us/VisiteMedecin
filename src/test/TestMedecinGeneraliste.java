@@ -12,7 +12,7 @@ public class TestMedecinGeneraliste {
 		med01.afficher();
 		med02.afficher();
 		med03.afficher();
-		med03.setNumeroDeTelephone("3615JESAIGN");
+		med03.setNumeroTelephone("3615JESAIGN");
 		med01.setTarifConsultation(80);
 		med01.afficher();
 		med02.afficher();

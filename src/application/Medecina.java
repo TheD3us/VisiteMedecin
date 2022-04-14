@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +13,11 @@ import bo.MedecinGeneraliste;
 public class Medecina {
 	static Scanner sc;
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException{
 		int choix = -1;
-		List<MedecinGeneraliste> listeMedecin = new ArrayList<MedecinGeneraliste>();
-		FileInputStream fis = new FileInputStream("C:\\Users\\ib\\eclipse-workspace\\VisiteMedecin\\src\\bo\\Medecin.txt");
+		ArrayList<MedecinGeneraliste> listeMedecin = new ArrayList<MedecinGeneraliste>();
 		sc = new Scanner(System.in);
-		
-		while(sc.hasNextLine()) {
-			
-		}
+		lireFichier(listeMedecin);
 		while(choix != 0) {
 		System.out.println("--------------------------Medecina--------------------------");
 		System.out.println("Bienvenue dans Medecina, veuillez choisir votre action :");
@@ -34,7 +31,7 @@ public class Medecina {
 		switch(choix) {
 		case 1 :{
 			System.out.println("--------------------------Liste Médecin--------------------------");
-			
+				
 				for(MedecinGeneraliste current : listeMedecin) {
 					current.afficher();
 				}
@@ -127,7 +124,7 @@ public class Medecina {
 			case 3:{
 				System.out.println("Veuillez modifier le numéro de téléphone :");
 				saisie = sc.nextLine();
-				medecinChoisit.setNumeroDeTelephone(saisie);
+				medecinChoisit.setNumeroTelephone(saisie);
 				System.out.println("Numéro de téléphone modifié");
 				break;
 			}
@@ -136,5 +133,22 @@ public class Medecina {
 			}
 		}
 			
+	}
+	
+	public static void lireFichier(ArrayList<MedecinGeneraliste> medecinGeneraliste) throws FileNotFoundException {
+		
+		FileInputStream fis = new FileInputStream("C:\\Users\\ib\\eclipse-workspace\\VisiteMedecin\\src\\bo\\Medecin.txt");
+		Scanner fichier = new Scanner(fis);
+		while(fichier.hasNextLine()) {
+			Adresse adresse = new Adresse(fichier.nextInt(),fichier.nextLine(),fichier.nextLine(),fichier.nextLine(),fichier.nextLine(),
+					fichier.nextLine(), fichier.nextLine(), fichier.nextLine());
+			fichier.nextLine();
+			if(adresse.getComplement().equalsIgnoreCase("SO")) {adresse.setComplement("");}
+			if(adresse.getEtage().equalsIgnoreCase("SO")) {adresse.setEtage("");}
+			if(adresse.getNoAppartement().equalsIgnoreCase("SO")) {adresse.setNoAppartement("");}
+			MedecinGeneraliste nomVariable = new MedecinGeneraliste(fichier.nextLine(), fichier.nextLine(), fichier.nextLine(), adresse);
+			medecinGeneraliste.add(nomVariable);
+		}
+		fichier.close();
 	}
 }

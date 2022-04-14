@@ -114,17 +114,18 @@ public class Adresse {
 	
 public void enregistrerAdresse() throws IOException {
 		try {
-			if(this.complement == null) {fw.write(this.complement);}else {fw.write("SO");}
-			if(this.noAppartement == null) {fw.write(this.noAppartement)  ;}else {fw.write("SO");}
-			if(this.etage == null) {fw.write(this.etage);}else {fw.write("SO");}
-			fw.write(this.numeroDeVoie); 
-			fw.write(this.complement);
-			fw.write(this.typeVoie);
-			fw.write(this.nomDeRue);
-			fw.write(this.codePostal);
-			fw.write(this.ville);
-			fw.write(this.noAppartement);
-			fw.write(this.etage);
+			if(this.complement != null) {FileWriterHelper.ecrire(this.complement+ "\n");}else {FileWriterHelper.ecrire("SO"+ "\n");}
+			if(this.noAppartement != null) {FileWriterHelper.ecrire(this.noAppartement+ "\n")  ;}else {FileWriterHelper.ecrire("SO"+ "\n");}
+			if(this.etage != null) {FileWriterHelper.ecrire(this.etage+ "\n");}else {FileWriterHelper.ecrire("SO"+ "\n");}
+			FileWriterHelper.ecrireChiffre(this.numeroDeVoie); 
+			FileWriterHelper.ecrire("\n");
+			FileWriterHelper.ecrire(this.complement+ "\n");
+			FileWriterHelper.ecrire(this.typeVoie+ "\n");
+			FileWriterHelper.ecrire(this.nomDeRue+ "\n");
+			FileWriterHelper.ecrire(this.codePostal+ "\n");
+			FileWriterHelper.ecrire(this.ville+ "\n");
+			FileWriterHelper.ecrire(this.noAppartement+ "\n");
+			FileWriterHelper.ecrire(this.etage+ "\n");
 		fw.close();
 		}catch (FileNotFoundException e){
 			e.printStackTrace();
