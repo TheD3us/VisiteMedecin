@@ -5,13 +5,13 @@ import java.time.LocalTime;
 public class Creneau {
 	private LocalTime heureDebut;
 	private int duree;
-	private MedecinGeneraliste medecinGeneraliste;
+	private Medecin medecin;
 	
 	
-	public Creneau(LocalTime heureDebut, int duree, MedecinGeneraliste medecinGeneraliste) {
+	public Creneau(LocalTime heureDebut, int duree, Medecin medecin) {
 		this.heureDebut = heureDebut;
 		this.duree = duree;
-		this.medecinGeneraliste = medecinGeneraliste;
+		this.medecin = medecin;
 	}
 	
 	public LocalTime getHeureDebut() {
@@ -26,11 +26,11 @@ public class Creneau {
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
-	public MedecinGeneraliste getMedecinGeneraliste() {
-		return medecinGeneraliste;
+	public Medecin getMedecin() {
+		return medecin;
 	}
-	public void setMedecinGeneraliste(MedecinGeneraliste medecinGeneraliste) {
-		this.medecinGeneraliste = medecinGeneraliste;
+	public void setMedecin(Medecin medecin) {
+		this.medecin = medecin;
 	}
 	
 	public void afficherCreneau() {

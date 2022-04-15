@@ -8,14 +8,16 @@ import java.util.List;
 import java.util.Scanner;
 
 import bo.Adresse;
+import bo.Medecin;
 import bo.MedecinGeneraliste;
+import bo.MedecinSpecialiste;
 
 public class Medecina {
 	static Scanner sc;
 	
 	public static void main(String[] args) throws IOException{
 		int choix = -1;
-		ArrayList<MedecinGeneraliste> listeMedecin = new ArrayList<MedecinGeneraliste>();
+		ArrayList<Medecin> listeMedecin = new ArrayList<Medecin>();
 		sc = new Scanner(System.in);
 		lireFichier(listeMedecin);
 		while(choix != 0) {
@@ -32,7 +34,7 @@ public class Medecina {
 		case 1 :{
 			System.out.println("--------------------------Liste Médecin--------------------------");
 				
-				for(MedecinGeneraliste current : listeMedecin) {
+				for(Medecin current : listeMedecin) {
 					current.afficher();
 				}
 			break;
@@ -45,8 +47,8 @@ public class Medecina {
 				modifierMedecin(listeMedecin);
 		}
 		default :{
-			for(MedecinGeneraliste current : listeMedecin) {
-				current.enregistrerMedecin();
+			for(Medecin current : listeMedecin) {
+				current.enregistrer();
 			}
 		}
 	}
@@ -54,7 +56,7 @@ public class Medecina {
 
 	}
 	
-	public static void ajoutMedecin(List<MedecinGeneraliste> listeMedecin) throws IOException {
+	public static void ajoutMedecin(List<Medecin> listeMedecin) throws IOException {
 		System.out.println("--------------------------Ajout Médecin--------------------------");
 
 		System.out.println("Veuillez rentrer l'adresse du médecin");
@@ -82,24 +84,45 @@ public class Medecina {
 		String prenom = sc.nextLine();
 		System.out.println("Veuiller rentrer le numéro de téléphone du médecin :");
 		String numeroDeTelephone = sc.nextLine();
-		MedecinGeneraliste nomVariable = new MedecinGeneraliste(nom, prenom, numeroDeTelephone, adresse);
-		listeMedecin.add(nomVariable);
+		System.out.println("Le médecin est il un généraliste ou est il spécialisé ?");
+		System.out.println("1 - Généraliste");
+		System.out.println("2 - Spécialiste");
+		int choix = sc.nextInt();
+		switch(choix) {
+		case 1:{
+			MedecinGeneraliste nomVariable = new MedecinGeneraliste(nom, prenom, numeroDeTelephone, adresse, null);
+			listeMedecin.add(nomVariable);
+		}
+		case 2:{
+			System.out.println("Veuillez rentrer le tarif :");
+			int tarifConsultation = sc.nextInt();
+			System.out.println("Veuillez choisir la spécialité :");
+			String specialite = sc.nextLine();
+			MedecinSpecialiste nomVariable = new MedecinSpecialiste(nom, prenom, numeroDeTelephone, adresse, null, tarifConsultation, specialite);
+			listeMedecin.add(nomVariable);
+		}
+		default:{
+			System.out.println("Il faut choisir une valeur possible");
+		}
+		}
+		
+		
 
 	}
 	
-	public static void modifierMedecin(List<MedecinGeneraliste> listeMedecin) {
+	public static void modifierMedecin(List<Medecin> listeMedecin) {
 		System.out.println("--------------------------Modifier Médecin--------------------------");
 		int compteur = 1;
 		int choix = 0;
 		String saisie;
 		System.out.println("Veuillez choisir le médecin à modifier : ");
-		for(MedecinGeneraliste current : listeMedecin) {
+		for(Medecin current : listeMedecin) {
 			System.out.print(compteur + " - ");
 			current.afficher();
 		}
 		
 		choix = sc.nextInt();
-		MedecinGeneraliste medecinChoisit = listeMedecin.get(choix);
+		Medecin medecinChoisit = listeMedecin.get(choix);
 		System.out.println("Que voulez vous modifier ?");
 		System.out.println("1 - nom ");
 		System.out.println("2 - prénom ");
@@ -135,19 +158,18 @@ public class Medecina {
 			
 	}
 	
-	public static void lireFichier(ArrayList<MedecinGeneraliste> medecinGeneraliste) throws FileNotFoundException {
+	public static void lireFichier(ArrayList<Medecin> medecin) throws FileNotFoundException {
 		
 		FileInputStream fis = new FileInputStream("C:\\Users\\ib\\eclipse-workspace\\VisiteMedecin\\src\\bo\\Medecin.txt");
 		Scanner fichier = new Scanner(fis);
 		while(fichier.hasNextLine()) {
 			Adresse adresse = new Adresse(fichier.nextInt(),fichier.nextLine(),fichier.nextLine(),fichier.nextLine(),fichier.nextLine(),
 					fichier.nextLine(), fichier.nextLine(), fichier.nextLine());
-			fichier.nextLine();
 			if(adresse.getComplement().equalsIgnoreCase("SO")) {adresse.setComplement("");}
 			if(adresse.getEtage().equalsIgnoreCase("SO")) {adresse.setEtage("");}
 			if(adresse.getNoAppartement().equalsIgnoreCase("SO")) {adresse.setNoAppartement("");}
-			MedecinGeneraliste nomVariable = new MedecinGeneraliste(fichier.nextLine(), fichier.nextLine(), fichier.nextLine(), adresse);
-			medecinGeneraliste.add(nomVariable);
+			Medecin nomVariable = new Medecin(fichier.nextLine(), fichier.nextLine(), fichier.nextLine(), adresse);
+			medecin.add(nomVariable);
 		}
 		fichier.close();
 	}

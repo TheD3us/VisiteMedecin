@@ -1,6 +1,6 @@
 package bo;
 
-public class Personne {
+public abstract class Personne {
 	protected String nom;
 	protected String prenom;
 	protected String numeroTelephone;
@@ -41,6 +41,12 @@ public class Personne {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
+	
+	public void afficher() {
+		System.out.println(this.nom + " " + this.prenom + " " + this.numeroTelephone  + " " );
+		this.adresse.afficher();
+		
+		}
 	
 	
 }

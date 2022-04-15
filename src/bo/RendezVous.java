@@ -34,8 +34,8 @@ public class RendezVous {
 	public void afficherRendezVous() {
 		System.out.println(this.date.getDayOfMonth() + "//" + this.date.getMonth() + "//" + this.date.getYear());
 		this.creneau.afficherCreneau();
-		System.out.println(creneau.getMedecinGeneraliste().getNom());
-		creneau.getMedecinGeneraliste().getAdresse().afficher();
+		System.out.println(creneau.getMedecin().getNom());
+		creneau.getMedecin().getAdresse().afficher();
 		this.patient.afficher();
 		
 	}
