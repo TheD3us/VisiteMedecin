@@ -18,7 +18,7 @@ public class Medecina {
 	
 	public static void main(String[] args) throws IOException{
 		int choix = -1;
-		ArrayList<Medecin> listeMedecin = new ArrayList<Medecin>();
+		List<Medecin> listeMedecin = new ArrayList<Medecin>();
 		sc = new Scanner(System.in);
 		lireFichier(listeMedecin);
 		while(choix != 0) {
@@ -119,13 +119,14 @@ public class Medecina {
 	
 	public static void modifierMedecin(List<Medecin> listeMedecin) {
 		System.out.println("--------------------------Modifier Médecin--------------------------");
-		int compteur = 1;
+		int compteur = 0;
 		int choix = 0;
 		String saisie;
 		System.out.println("Veuillez choisir le médecin à modifier : ");
 		for(Medecin current : listeMedecin) {
 			System.out.print(compteur + " - ");
 			current.afficher();
+			compteur++;
 		}
 		
 		choix = sc.nextInt();
@@ -165,18 +166,19 @@ public class Medecina {
 			
 	}
 	
-	public static void lireFichier(ArrayList<Medecin> medecin) throws FileNotFoundException {
+	public static void lireFichier(List<Medecin> medecin) throws FileNotFoundException {
 		
 		FileInputStream fis = new FileInputStream("C:\\Users\\ib\\eclipse-workspace\\VisiteMedecin\\src\\bo\\Medecin.txt");
 		Scanner fichier = new Scanner(fis);
 		while(fichier.hasNextLine()) {
-			Adresse adresse = new Adresse(fichier.nextInt(),fichier.nextLine(),fichier.nextLine(),fichier.nextLine(),fichier.nextLine(),
+			int nb = Integer.parseInt(fichier.nextLine());
+			Adresse adresse = new Adresse(nb,fichier.nextLine(),fichier.nextLine(),fichier.nextLine(),fichier.nextLine(),
 					fichier.nextLine(), fichier.nextLine(), fichier.nextLine());
 			if(adresse.getComplement().equalsIgnoreCase("SO")) {adresse.setComplement("");}
 			if(adresse.getEtage().equalsIgnoreCase("SO")) {adresse.setEtage("");}
 			if(adresse.getNoAppartement().equalsIgnoreCase("SO")) {adresse.setNoAppartement("");}
 			Medecin nomVariable = new MedecinGeneraliste(fichier.nextLine(), fichier.nextLine(), fichier.nextLine(), adresse, null);
-			if(!fichier.nextLine().equals("---------------------------------")) {
+			if(fichier.nextLine().equals("---------------------------------") != true) {
 				MedecinSpecialiste ms = (MedecinSpecialiste) nomVariable;
 				ms.setTarifConsultation(fichier.nextInt());
 				ms.setSpecialite(fichier.nextLine());
