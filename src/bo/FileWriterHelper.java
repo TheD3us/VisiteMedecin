@@ -16,11 +16,12 @@ public class FileWriterHelper {
 	}
 	
 	public static void ecrire(String text) throws IOException {
-		fw.write(text);
+		fw.write(text + "\n");
+
 	}
 	
 	public static void ecrireChiffre(int nb) throws IOException {
-		fw.write(nb);
+		fw.write(nb + "\n");
 	}
 	
 	public static void fermer() throws IOException {

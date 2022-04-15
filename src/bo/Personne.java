@@ -42,11 +42,7 @@ public abstract class Personne {
 		this.adresse = adresse;
 	}
 	
-	public void afficher() {
-		System.out.println(this.nom + " " + this.prenom + " " + this.numeroTelephone  + " " );
-		this.adresse.afficher();
-		
-		}
+	public abstract void afficher() ;
 	
 	
 }

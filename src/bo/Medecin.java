@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Medecin extends Personne {
+public abstract class Medecin extends Personne {
 	
 	protected ArrayList<Creneau> creneaux = new ArrayList<Creneau> ();
 	
@@ -32,11 +32,14 @@ public class Medecin extends Personne {
 	}
 	
 	public void afficher() {
-		super.afficher();
+		System.out.println(this.nom + " " + this.prenom + " " + this.numeroTelephone  + " " );
+		this.adresse.afficher();
+		if(creneaux!= null) {
 		for(Creneau current : creneaux) {
 			if(current != null) {
 			current.afficherCreneau();
 			}
+		}
 		}
 	}
 	
@@ -45,11 +48,11 @@ public class Medecin extends Personne {
 
 		try {
 		adresse.enregistrerAdresse();
-		FileWriterHelper.ecrire(this.nom + "\n");
-		FileWriterHelper.ecrire(this.prenom + "\n");
-		FileWriterHelper.ecrire(this.numeroTelephone + "\n");
+		FileWriterHelper.ecrire(this.nom);
+		FileWriterHelper.ecrire(this.prenom);
+		FileWriterHelper.ecrire(this.numeroTelephone);
+
 		
-		FileWriterHelper.ecrire("---------------------------------");
 
 		
 		}catch (FileNotFoundException e){

@@ -53,7 +53,7 @@ public class Patient extends Personne{
 			throw new Exception("Un homme ou une femme, le reste est imaginaire");
 		}
 	}
-	
+	@Override
 	public void afficher() {
 		System.out.println(this.nom + " " + this.prenom + " " + this.numeroTelephone + " " + this.sexe + " "  );
 		this.adresse.afficher();

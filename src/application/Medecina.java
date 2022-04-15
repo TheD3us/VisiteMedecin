@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import bo.Adresse;
+import bo.FileWriterHelper;
 import bo.Medecin;
 import bo.MedecinGeneraliste;
 import bo.MedecinSpecialiste;
@@ -49,6 +50,8 @@ public class Medecina {
 		default :{
 			for(Medecin current : listeMedecin) {
 				current.enregistrer();
+				FileWriterHelper.fermer();
+				break;
 			}
 		}
 	}
@@ -88,10 +91,12 @@ public class Medecina {
 		System.out.println("1 - Généraliste");
 		System.out.println("2 - Spécialiste");
 		int choix = sc.nextInt();
+		
 		switch(choix) {
 		case 1:{
 			MedecinGeneraliste nomVariable = new MedecinGeneraliste(nom, prenom, numeroDeTelephone, adresse, null);
 			listeMedecin.add(nomVariable);
+			break;
 		}
 		case 2:{
 			System.out.println("Veuillez rentrer le tarif :");
@@ -100,9 +105,11 @@ public class Medecina {
 			String specialite = sc.nextLine();
 			MedecinSpecialiste nomVariable = new MedecinSpecialiste(nom, prenom, numeroDeTelephone, adresse, null, tarifConsultation, specialite);
 			listeMedecin.add(nomVariable);
+			break;
 		}
 		default:{
 			System.out.println("Il faut choisir une valeur possible");
+			break;
 		}
 		}
 		
@@ -168,8 +175,15 @@ public class Medecina {
 			if(adresse.getComplement().equalsIgnoreCase("SO")) {adresse.setComplement("");}
 			if(adresse.getEtage().equalsIgnoreCase("SO")) {adresse.setEtage("");}
 			if(adresse.getNoAppartement().equalsIgnoreCase("SO")) {adresse.setNoAppartement("");}
-			Medecin nomVariable = new Medecin(fichier.nextLine(), fichier.nextLine(), fichier.nextLine(), adresse);
-			medecin.add(nomVariable);
+			Medecin nomVariable = new MedecinGeneraliste(fichier.nextLine(), fichier.nextLine(), fichier.nextLine(), adresse, null);
+			if(!fichier.nextLine().equals("---------------------------------")) {
+				MedecinSpecialiste ms = (MedecinSpecialiste) nomVariable;
+				ms.setTarifConsultation(fichier.nextInt());
+				ms.setSpecialite(fichier.nextLine());
+				medecin.add(ms);
+			}else {
+				medecin.add(nomVariable);
+			}
 		}
 		fichier.close();
 	}

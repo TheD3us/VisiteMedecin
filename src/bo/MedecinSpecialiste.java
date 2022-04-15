@@ -45,8 +45,9 @@ public class MedecinSpecialiste extends Medecin {
 	@Override
 	public void enregistrer() throws IOException {
 		super.enregistrer();
-		FileWriterHelper.ecrire(tarifConsultation + "\n");
-		FileWriterHelper.ecrire(this.specialite + "\n");
+		FileWriterHelper.ecrireChiffre(tarifConsultation);
+		FileWriterHelper.ecrire(this.specialite);
+		FileWriterHelper.ecrire("---------------------------------");
 	}
 	
 	

@@ -1,21 +1,11 @@
 package bo;
 
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Adresse {
 	
 	static String chemin = "C:\\Users\\ib\\eclipse-workspace\\VisiteMedecin\\src\\bo\\Medecin.txt";
-	static FileWriter fw;
-	static {
-		try {
-			fw = new FileWriter(chemin);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	private int numeroDeVoie;
 	private String complement;
 	private String typeVoie;
@@ -114,19 +104,17 @@ public class Adresse {
 	
 public void enregistrerAdresse() throws IOException {
 		try {
-			if(this.complement != null) {FileWriterHelper.ecrire(this.complement+ "\n");}else {FileWriterHelper.ecrire("SO"+ "\n");}
-			if(this.noAppartement != null) {FileWriterHelper.ecrire(this.noAppartement+ "\n")  ;}else {FileWriterHelper.ecrire("SO"+ "\n");}
-			if(this.etage != null) {FileWriterHelper.ecrire(this.etage+ "\n");}else {FileWriterHelper.ecrire("SO"+ "\n");}
+			
+			
+			
 			FileWriterHelper.ecrireChiffre(this.numeroDeVoie); 
-			FileWriterHelper.ecrire("\n");
-			FileWriterHelper.ecrire(this.complement+ "\n");
-			FileWriterHelper.ecrire(this.typeVoie+ "\n");
-			FileWriterHelper.ecrire(this.nomDeRue+ "\n");
-			FileWriterHelper.ecrire(this.codePostal+ "\n");
-			FileWriterHelper.ecrire(this.ville+ "\n");
-			FileWriterHelper.ecrire(this.noAppartement+ "\n");
-			FileWriterHelper.ecrire(this.etage+ "\n");
-		fw.close();
+			if(this.complement != null) {FileWriterHelper.ecrire(this.complement);}else {FileWriterHelper.ecrire("SO");}
+			FileWriterHelper.ecrire(this.typeVoie);
+			FileWriterHelper.ecrire(this.nomDeRue);
+			FileWriterHelper.ecrire(this.codePostal);
+			FileWriterHelper.ecrire(this.ville);
+			if(this.noAppartement != null) {FileWriterHelper.ecrire(this.noAppartement)  ;}else {FileWriterHelper.ecrire("SO");}
+			if(this.etage != null) {FileWriterHelper.ecrire(this.etage);}else {FileWriterHelper.ecrire("SO");}
 		}catch (FileNotFoundException e){
 			e.printStackTrace();
 		}

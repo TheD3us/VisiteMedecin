@@ -21,8 +21,9 @@ public class MedecinGeneraliste extends Medecin {
 		super(nom, prenom, numeroTelephone, adresse, creneaux);
 	}
 	
-	
+	@Override
 	public void afficher() {
+
 		super.afficher();
 		System.out.println(" " + tarifConsultation + " euros");
 
@@ -30,7 +31,7 @@ public class MedecinGeneraliste extends Medecin {
 	@Override
 	public void enregistrer() throws IOException {
 		super.enregistrer();
-		FileWriterHelper.ecrire(tarifConsultation + "\n");
+		FileWriterHelper.ecrire("---------------------------------");
 	}
 	
 	
